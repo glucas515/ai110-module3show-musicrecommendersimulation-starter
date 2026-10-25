@@ -76,14 +76,16 @@ Prompts:
 
 How you checked whether the recommender behaved as expected. 
 
-Prompts:  
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
 
-No need for numeric metrics unless you created some.
+### What I noticed
+
+- Ordinary profiles gave sensible top results, such as Sunrise City for pop/happy and Library Rain and Midnight Coding for chill lofi.
+- Genre and mood together are worth 0.70 of the score, so they can outweigh a large energy mismatch. A chill lofi listener asking for energy 0.90 still gets the calm lofi songs first.
+- A mood that isn't in the catalog ("sad") contributes nothing, so the results fall back to genre and energy and include a happy song.
+- Beyond the first two or three results, scores drop to about 0.3 and the list is effectively "songs with similar energy."
+- `likes_acoustic` is stored in the profile but isn't used, so an acoustic fan gets the same results as everyone else.
+- A target energy outside 0 to 1 isn't rejected. It produces all-zero scores in CSV order.
 
 ---
 
