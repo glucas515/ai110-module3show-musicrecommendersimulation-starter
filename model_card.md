@@ -87,6 +87,15 @@ How you checked whether the recommender behaved as expected.
 - `likes_acoustic` is stored in the profile but isn't used, so an acoustic fan gets the same results as everyone else.
 - A target energy outside 0 to 1 isn't rejected. It produces all-zero scores in CSV order.
 
+### Does it feel right?
+
+For High-Energy Pop, the results feel right: Sunrise City first, then Gym Hero and Rooftop Lights. A workout pop track and a bright indie-pop track both fit that listener.
+
+For Deep Intense Rock, Storm Runner first is right, but Gym Hero second feels off. It's a pop song that gets there through the "intense" mood and high energy. Iron Comet (metal, angry, energy 0.94) is arguably closer to rock, yet it scores only 0.29 because the scoring treats "metal" and "rock" as completely different.
+
+The same song doesn't win every list, because the #1 result changes with the profile. But Gym Hero and Storm Runner each appear in the top 5 of 5 of the 7 meaningful profiles, and four songs never appear at all. That comes from the small catalog and from energy being the only graded signal, which fills the lower positions with high-energy songs.
+
+Storm Runner scores 0.997 for the Deep Intense Rock profile (0.35 genre + 0.35 mood + 0.297 energy), and Gym Hero scores 0.647 (0.35 mood + 0.297 energy) without a genre match. The scoring never penalizes a mismatch, so a pop song can rank second for a rock listener just by matching the mood and the energy.
 ---
 
 ## 8. Future Work  
