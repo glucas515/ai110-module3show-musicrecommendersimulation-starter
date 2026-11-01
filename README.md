@@ -133,6 +133,16 @@ Use this section to document the experiments you ran. For example:
 - What happened when you changed the weight on genre from 2.0 to 0.5
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
+### Experiment: weight shift (genre halved, energy doubled)
+
+I changed the genre weight from 0.35 to 0.175 and the energy weight from 0.30 to 0.60, leaving mood at 0.35. The maximum score became 1.125 instead of 1.0. The ranking order changed for 4 of my 8 test profiles. The other 4 kept the same order with different scores.
+
+- **High-Energy Pop:** Rooftop Lights (indie pop, happy) moved above Gym Hero (pop, intense). That seems more accurate for a pop/happy listener, because the mood match now counts for more than the genre match.
+- **Chill Lofi:** Spacewalk Thoughts (ambient, chill) moved above Focus Flow (lofi, focused). That is different, but not clearly better.
+- **Chill lofi at high energy:** after the two lofi songs, the rest of the list became high-energy songs from other genres (Storm Runner, Crystal Current, Gym Hero), so the energy preference overrode the lofi preference.
+- **Classical/angry clash:** Winter Glass, the only classical song, dropped out of the top 5.
+
+**Verdict:** the change made the system more energy-driven. A few results are arguably better, but most are just different. I reverted to 0.35 / 0.35 / 0.30 so the README recipe and the 1.0 maximum stay accurate.
 
 ---
 
