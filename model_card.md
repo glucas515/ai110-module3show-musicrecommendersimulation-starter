@@ -69,6 +69,7 @@ Prompts:
 - Genres or moods that are underrepresented  
 - Cases where the system overfits to one preference  
 - Ways the scoring might unintentionally favor some users  
+The system works much better for listeners whose tastes are well represented in the catalog. A chill lofi listener gets four strong matches (0.99, 0.99, 0.64 and 0.62), but a deep intense rock listener gets only two (1.00 and 0.65) before the scores fall to 0.29. This happens because genre and mood only score on exact label matches, and 13 of the 15 genres and 11 of the 14 moods appear on just one song. The system also ignores likes_acoustic completely, and it never checks that target_energy is between 0 and 1, so an out-of-range value gives every song a score of 0. Together these make the recommender narrow and unintentionally favor some users over others.
 
 ---
 
