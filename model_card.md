@@ -2,60 +2,31 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+VibeMatch 1.0 is a music recommender.
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+VibeMatch ranks songs from a small CSV for one user profile. The profile includes a favorite genre, a favorite mood, and a target energy. This is a classroom simulation, not a tool for real listeners or a real streaming service. It should not be used to judge anyone's taste.
 
 ---
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
-
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+The model compares the profile's genre and mood with each song. An exact label match adds 0.35 for genre and 0.35 for mood. It ignores case and spaces when comparing labels. Energy adds up to 0.30, based on how close the song's energy is to the target. The model sorts songs by score and shows the top five with reasons for their scores.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+The catalog has 18 songs in data/songs.csv. Each song has a title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. There are 15 genres and 14 moods. Thirteen genres and 11 moods appear on only one song. The model uses only genre, mood, and energy. It does not use likes_acoustic, tempo, valence, danceability, or acousticness.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+The model gives strong matches when the catalog has songs that fit the profile. A Chill Lofi profile gets scores of 0.99, 0.99, 0.64, and 0.62 for its first four results. High-Energy Pop puts Sunrise City first at 0.98. Deep Intense Rock puts Storm Runner first at 1.00. Each result lists its reasons, so the score is easy to explain.
 
 ---
 
@@ -118,7 +89,7 @@ I was surprised that Gym Hero could rank near the top for several very different
 - **High-Energy Pop vs. Chill Lofi:** High-Energy Pop puts Sunrise City first (0.98), followed by Gym Hero (0.64) and Rooftop Lights (0.61). Chill Lofi instead puts Library Rain and Midnight Coding first (both 0.99), then Focus Flow (0.64) and Spacewalk Thoughts (0.62). The pop and lofi profiles favor different genres and moods, so the change in leading songs makes sense.
 - **High-Energy Pop vs. Deep Intense Rock:** Sunrise City leads for High-Energy Pop at 0.98, while Storm Runner leads for Deep Intense Rock at 1.00. Gym Hero appears in both lists (0.64 for Pop and 0.65 for Rock), while Iron Comet is third for Rock at 0.29. The rock profile's intense mood and genre favor Storm Runner, while Gym Hero's high energy and intense mood help it appear despite being pop.
 - **Chill Lofi vs. Chill Lofi at energy 0.90:** With the regular Chill Lofi profile, Library Rain and Midnight Coding both score 0.99. At energy 0.90, Midnight Coding scores 0.86 and Library Rain 0.83. Their order switches and their scores are lower because the requested energy is higher than what these calm lofi songs offer.
-- **Pop/happy vs. Pop/sad:** Pop/happy (the Acoustic fan profile at energy 0.80) puts Sunrise City first at 0.99, then Rooftop Lights at 0.64 and Gym Hero at 0.61. Pop/sad instead puts Gym Hero first at 0.64 and Sunrise City second at 0.63. Because "sad" is not in the catalog, that profile cannot get a sad-mood match; genre and energy still help pop songs rank. Gym Hero keeps showing up for people who want Happy Pop because it is pop and intense, and has very high energy, even though its mood is not happy.
+- - **Pop/happy vs. Pop/sad:** High-Energy Pop (pop, happy, energy 0.90) puts Sunrise City first at 0.98, then Gym Hero at 0.64 and Rooftop Lights at 0.61. Pop/sad asks for the same genre and energy but a "sad" mood, which no song in the catalog has, so Sunrise City drops to 0.63 and Gym Hero edges ahead at 0.64. The only thing that changed was the mood, and it cost Sunrise City its 0.35 mood bonus. Gym Hero keeps showing up for people who just want Happy Pop because it is a pop song with very high energy, and the system never penalizes it for having the wrong mood.
 - **High-Energy Pop at 0.90 vs. Acoustic fan at 0.80:** The High-Energy Pop results are Sunrise City at 0.98, Gym Hero at 0.64, and Rooftop Lights at 0.61. The Acoustic fan profile (pop/happy at energy 0.80) gives Sunrise City 0.99, Rooftop Lights 0.64, and Gym Hero 0.61. Sunrise City leads both, while Rooftop Lights moves ahead of Gym Hero for the Acoustic fan; the model does not use the acoustic preference, and the different energy target helps explain the change in ordering and scores.
 
 
@@ -126,14 +97,7 @@ I was surprised that Gym Hero could rank near the top for several very different
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+The model could use likes_acoustic and the other song features. It could give partial credit to related genres or moods, such as indie pop for pop, and check that target energy is between 0 and 1. A larger catalog and more variety in the top five could also improve recommendations.
 
 ---
 
