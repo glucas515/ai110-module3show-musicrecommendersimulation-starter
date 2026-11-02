@@ -110,3 +110,11 @@ Prompts:
 - What you learned about recommender systems  
 - Something unexpected or interesting you discovered  
 - How this changed the way you think about music recommendation apps  
+
+My biggest learning moment was the weight experiment. I cut the genre weight in half and doubled the energy weight, and the top results barely changed. That showed me the small catalog matters as much as the formula. With only one song in most genres, no weights could fix the thin results.
+
+Copilot saved me a lot of time writing the code and the first drafts of this card. But I had to double-check it. At one point it described my experiment weights as if they were my final ones. It also left reason text with the old point values after I changed the weights. I caught both by running the program and comparing the real scores to what was written.
+
+What surprised me most is how a few simple rules can feel like real recommendations. When Chill Lofi gave me Library Rain at 0.99, it felt right, and the listed reasons made it feel explained. The illusion broke when Gym Hero, a pop song, showed up for a rock listener. It matched only the mood and the energy.
+
+If I kept going, I would use the acoustic preference, give partial credit for related genres like indie pop and pop, check that energy is between 0 and 1, and add more songs.
